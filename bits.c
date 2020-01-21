@@ -140,7 +140,7 @@ NOTES:
  *   Rating: 1
  */
 int bitNor(int x, int y) {
-  return (~x & ~y);
+  return ~(x | y);
 }
 /* 
  * fitsShort - return 1 if x can be represented as a 
