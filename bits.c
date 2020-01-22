@@ -140,7 +140,7 @@ NOTES:
  *   Rating: 1
  */
 int bitNor(int x, int y) {
-  return ~(x | y);
+  return (~x & ~y);
 }
 /* 
  * fitsShort - return 1 if x can be represented as a 
@@ -151,7 +151,7 @@ int bitNor(int x, int y) {
  *   Rating: 1
  */
 int fitsShort(int x) {
-  return 2;
+  return !(((x<<16)>>16) ^ x);
 }
 /* 
  * thirdBits - return word with every third bit (starting from the LSB) set to 1
