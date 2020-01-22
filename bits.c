@@ -160,7 +160,12 @@ int fitsShort(int x) {
  *   Rating: 1
  */
 int thirdBits(void) {
-  return 2;
+    int x, y, z;
+    x = 0x49;
+    x = (x<<9);
+    y = x + 0x49;
+    z = (y<<18);
+    return (y+z);
 }
 /* 
  * anyEvenBit - return 1 if any even-numbered bit in word set to 1
@@ -170,7 +175,16 @@ int thirdBits(void) {
  *   Rating: 2
  */
 int anyEvenBit(int x) {
-  return 2;
+    int y, z1, z2, z3, z4;
+    y = 0x55;
+    z1 = (x & y);
+    x = (x>>8);
+    z2 = (x & y);
+    x = (x>>8);
+    z3 = (x & y);
+    x = (x>>8);
+    z4 = (x & y);
+    return !!(z1 | z2 | z3 | z4);
 }
 /* 
  * copyLSB - set all bits of result to least significant bit of x
