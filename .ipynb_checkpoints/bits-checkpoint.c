@@ -1,7 +1,7 @@
 /* 
  * CS:APP Data Lab 
  * 
- * <Please put your name and userid here>
+ * Mason Ferrell, 108-42-4192
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -151,7 +151,7 @@ int bitNor(int x, int y) {
  *   Rating: 1
  */
 int fitsShort(int x) {
-  return 2;
+  return !(((x<<16)>>16) ^ x);
 }
 /* 
  * thirdBits - return word with every third bit (starting from the LSB) set to 1
@@ -160,7 +160,12 @@ int fitsShort(int x) {
  *   Rating: 1
  */
 int thirdBits(void) {
-  return 2;
+    int x, y, z;
+    x = 0x49;
+    x = (x<<9);
+    y = x + 0x49;
+    z = (y<<18);
+    return (y+z);
 }
 /* 
  * anyEvenBit - return 1 if any even-numbered bit in word set to 1
@@ -170,7 +175,16 @@ int thirdBits(void) {
  *   Rating: 2
  */
 int anyEvenBit(int x) {
-  return 2;
+    int y, z1, z2, z3, z4;
+    y = 0x55;
+    z1 = (x & y);
+    x = (x>>8);
+    z2 = (x & y);
+    x = (x>>8);
+    z3 = (x & y);
+    x = (x>>8);
+    z4 = (x & y);
+    return !!(z1 | z2 | z3 | z4);
 }
 /* 
  * copyLSB - set all bits of result to least significant bit of x
@@ -180,7 +194,7 @@ int anyEvenBit(int x) {
  *   Rating: 2
  */
 int copyLSB(int x) {
-  return 2;
+  return ((x<<31)>>31);
 }
 /* 
  * implication - return x -> y in propositional logic - 0 for false, 1
@@ -192,7 +206,7 @@ int copyLSB(int x) {
  *   Rating: 2
  */
 int implication(int x, int y) {
-    return 2;
+    return ((~x) | y);
 }
 /* 
  * bitMask - Generate a mask consisting of all 1's 

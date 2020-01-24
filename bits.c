@@ -206,7 +206,7 @@ int copyLSB(int x) {
  *   Rating: 2
  */
 int implication(int x, int y) {
-    return 2;
+    return ((~x) | y);
 }
 /* 
  * bitMask - Generate a mask consisting of all 1's 
