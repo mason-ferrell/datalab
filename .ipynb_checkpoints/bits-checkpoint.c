@@ -219,7 +219,19 @@ int implication(int x, int y) {
  *   Rating: 3
  */
 int bitMask(int highbit, int lowbit) {
-  return 2;
+    int x, y, z;
+    x = (0x1 << 31);
+    z = (~highbit)+1;
+    x >> (31+z);
+    x = ~x;
+    x << 1;
+    x = x + 1;
+    
+    y = (0x1 << 31);
+    z = (~lowbit)+1;
+    y >> (31+z);
+    
+    return (x&y);
 }
 /*
  * ezThreeFourths - multiplies by 3/4 rounding toward 0,
