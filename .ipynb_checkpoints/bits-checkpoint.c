@@ -206,7 +206,7 @@ int copyLSB(int x) {
  *   Rating: 2
  */
 int implication(int x, int y) {
-    return ((~x) | y);
+    return ((!x) | (!!y));
 }
 /* 
  * bitMask - Generate a mask consisting of all 1's 
@@ -222,16 +222,16 @@ int bitMask(int highbit, int lowbit) {
     int x, y, z;
     x = (0x1 << 31);
     z = (~highbit)+1;
-    x >> (31+z);
+    x = (x >> (31+z));
     x = ~x;
-    x << 1;
+    x = (x << 1);
     x = x + 1;
     
     y = (0x1 << 31);
     z = (~lowbit)+1;
-    y >> (31+z);
+    y = (y >> (31+z));
     
-    return (x&y);
+    return (x & y);
 }
 /*
  * ezThreeFourths - multiplies by 3/4 rounding toward 0,
