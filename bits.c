@@ -245,7 +245,10 @@ int bitMask(int highbit, int lowbit) {
  *   Rating: 3
  */
 int ezThreeFourths(int x) {
-  return 2;
+    int sign;
+    x = (x+x+x);
+    sign = x >> 31;
+    return ((x + (0x3&sign)) >> 2);
 }
 /*
  * satMul3 - multiplies by 3, saturating to Tmin or Tmax if overflow
