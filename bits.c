@@ -262,7 +262,20 @@ int ezThreeFourths(int x) {
  *  Rating: 3
  */
 int satMul3(int x) {
-    return 2;
+    int y, xSign, midSign, ySign, min, max, sat;
+    y = (x<<1);
+    
+    xSign = (x>>31);
+    midSign = (y >> 31);
+    y = y + x;
+    ySign = (y >> 31);
+    min = (1 << 31);
+    max = ~min;
+
+    sat = (xSign ^ midSign)  | (midSign ^ ySign);
+
+    x = (y & ~sat) | (sat & ((xSign & min) | (~xSign & max)));
+    return x;
 }
 /*
  * bitParity - returns 1 if x contains an odd number of 0's
