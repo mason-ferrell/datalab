@@ -344,7 +344,24 @@ int trueThreeFourths(int x)
  *   Rating: 2
  */
 unsigned float_neg(unsigned uf) {
- return 2;
+    int sign, mask, test1, test2;
+    
+    test1 = 0x7f800000;
+    test2 = 0x7fffff;
+    
+    if(((test1&uf)==test1) && ((test2&uf)!=0)){
+        return uf;
+    }
+    
+    sign = (uf>>31);
+    mask = 0x80000000;
+    if(sign==0){
+        return (uf|mask);
+    }
+    else{
+        mask = ~mask;
+        return (uf&mask);
+    }
 }
 /* 
  * float_i2f - Return bit-level equivalent of expression (float) x
