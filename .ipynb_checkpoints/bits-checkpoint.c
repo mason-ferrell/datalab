@@ -262,7 +262,7 @@ int ezThreeFourths(int x) {
  *  Rating: 3
  */
 int satMul3(int x) {
-    int y, xSign, midSign, ySign, min, max, sat;
+    int y, xSign, midSign, ySign, min, max, sat = 0;
     y = (x<<1);
     
     xSign = (x>>31);
@@ -285,7 +285,13 @@ int satMul3(int x) {
  *   Rating: 4
  */
 int bitParity(int x) {
-  return 2;
+    int p16, p8, p4, p2, p = 0;
+    p16 = x ^ (x>>16);
+    p8 = p16 ^ (p16 >> 8);
+    p4 = p8 ^ (p8 >> 4);
+    p2 = p4 ^ (p4 >> 2);
+    p = p2 ^ (p2 >> 1);
+    return (p&0x1);
 }
 /*
  * ilog2 - return floor(log base 2 of x), where x > 0
