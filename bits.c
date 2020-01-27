@@ -301,7 +301,13 @@ int bitParity(int x) {
  *   Rating: 4
  */
 int ilog2(int x) {
-  return 2;
+    int ilog2 = 0;
+    ilog2 = (!!(x >> 16)) << 4;
+    ilog2 = ilog2 + ((!!(x >> (ilog2 + 8))) << 3);
+    ilog2 = ilog2 + ((!!(x >> (ilog2 + 4))) << 2);
+    ilog2 = ilog2 + ((!!(x >> (ilog2 + 2))) << 1);
+    ilog2 = ilog2 + (!!(x >> (ilog2 + 1)));
+    return ilog2;
 }
 /*
  * trueThreeFourths - multiplies by 3/4 rounding toward 0,
