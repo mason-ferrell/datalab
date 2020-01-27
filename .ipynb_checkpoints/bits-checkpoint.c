@@ -321,7 +321,13 @@ int ilog2(int x) {
  */
 int trueThreeFourths(int x)
 {
-  return 2;
+    int r, s;
+    s = (x>>31);
+    r = (x&0x3);
+    x = (x>>2);
+    x = x+(x<<1);
+    x = x+((r+(r<<1) + (s&0x3)) >> 2);
+    return x;
 }
 /*
  * Extra credit
