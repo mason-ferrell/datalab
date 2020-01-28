@@ -373,7 +373,31 @@ unsigned float_neg(unsigned uf) {
  *   Rating: 4
  */
 unsigned float_i2f(int x) {
-  return 2;
+    unsigned sign, e, f, mask = 0;
+    mask = (1<<31);
+    sign = x&mask;
+    e = 158;
+    
+    if(x==mask){
+        return (mask|e<<23);
+    }
+    if(!x){
+        return 0;
+    }
+    if(sign){
+        x = ~x+1;
+    }
+    while(!(x&mask)){
+        x = x<<1;
+        e--;
+    }
+    
+    f = (x&(~mask)) >> 8;
+    if(x&0x80 && ((x&0x7f)>0 || (f&1))){
+        f++;
+    }
+    
+    return (sign+(e<<23)+f);
 }
 /* 
  * float_twice - Return bit-level equivalent of expression 2*f for
@@ -387,5 +411,21 @@ unsigned float_i2f(int x) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
-  return 2;
+    unsigned sign, e, f = 0;
+    if((0x7f800000&uf) == 0x7f800000){
+        return uf;
+    }
+    
+    sign = (uf&0x80000000);
+    e = (uf >> 23)&0xff;
+    f = (uf&0x7fffff);
+    
+    if(e==0){
+        f = (f<<1);
+        return (sign + (e<<23) + f);
+    }
+    else{
+        e = e + 1;
+        return (sign + (e<<23) + f);
+    }
 }
