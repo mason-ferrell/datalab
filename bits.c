@@ -411,18 +411,28 @@ unsigned float_i2f(int x) {
  *   Rating: 4
  */
 unsigned float_twice(unsigned uf) {
-    unsigned sign, e, f = 0;
+    int sign, e, f = 0;
     if((0x7f800000&uf) == 0x7f800000){
-        return uf;
+        if((uf&0x7fffff)>0){
+            return uf;
+        }
+        else{
+            return uf;
+        }
     }
     
     sign = (uf&0x80000000);
-    e = (uf >> 23)&0xff;
+    e = ((uf >> 23)&0xff);
     f = (uf&0x7fffff);
     
     if(e==0){
         f = (f<<1);
-        return (sign + (e<<23) + f);
+        return (sign + f);
+    }
+    else if(e==0xfe){
+        e = e+1;
+        f = 0;
+        return (sign + (e<<23));
     }
     else{
         e = e + 1;
